@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#box{width: 590px;height: 470px;margin: 50px auto;position: relative;}
+        #bImg div{display: none;}
+        #bImg div.b-img{display:block;}
+        #arrow{position: absolute;top: 50%;margin-top: -16px;width: 100%;}
+        #arrow .arrow-right{width: 32px;height: 32px;background: rgba(0,0,0,0.5);padding: 2px; float: right;}
+        #arrow .arrow-left{width: 32px;height: 32px;background: rgba(0,0,0,0.5);padding: 2px; float: left;}
+        #arrow .arrow-right:hover{background: rgba(0,0,0,0.6);}
+        #arrow .arrow-left:hover{background: rgba(0,0,0,0.6);}
+        #box-dot{position: absolute;bottom: 20px;left: 50%;transform:translateX(-50%);}
+        #box-dot li{width: 9px;height: 9px;border: 1px solid violet;margin-right: 9px;float: left;list-style: none;border-radius: 50%; } 
+         #box-dot .oli{background: violet;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="bImg">
+			<div class="b-img"><img src="images/l1.jpg" alt=""></div>
+			<div><img src="images/l2.jpg" alt=""></div>
+			<div><img src="images/l3.jpg" alt=""></div>
+			<div><img src="images/l4.jpg" alt=""></div>
+		</div>
+		<div id="arrow">
+			<div class="arrow-left"><img src="images/arrow-left.png" alt=""></div>
+			<div class="arrow-right"><img src="images/arrow-right.png" alt=""></div>
+		</div>
+		<ol id="box-dot">
+			<li class="oli"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ol>
+	</div>
+	<script type="text/javascript">
+		var o=document.getElementById('box');
+		var boxImg=document.getElementById('bImg').getElementsByTagName('div');
+		var index=0;
+		var len=boxImg.length;
+		var s;
+		//自动播放
+		s=setInterval(showRight,2000)
+		//箭头
+		var aLeft=document.getElementById('arrow').getElementsByTagName('div')
+		o.onmouseenter=function () {
+			o.style.cursor='pointer';
+			clearInterval(s);
+		};
+		o.onmouseleave=function () {
+			s=setInterval(showRight,2000);
+		};
+        aLeft[0].onclick=function(){
+        	showLeft();
+        }
+        aLeft[1].onclick=function(){
+            showRight();
+        }
+        //指示器
+        var boxDot=document.getElementById('box-dot').getElementsByTagName('li');
+        console.log(boxDot[0])
+        for(var i=0;i<len;i++){
+        	boxDot[i]._index=i
+           boxDot[i].onclick=function(){
+           	    boxDot[index].className='';
+                boxImg[index].className='';
+                this.className='oli'
+                boxImg[this._index].className='b-img';
+                index=this._index
+           }
+                   }
+		function showRight() {
+			 boxImg[index].className='';
+			  boxDot[index].className='';
+             index++;
+             if(index==len){
+             	index=0;
+             }
+             boxImg[index].className='b-img';
+              boxDot[index].className='oli';
+		}
+		function showLeft(){
+			boxImg[index].className='';
+			 boxDot[index].className='';
+			 
+			index--;
+			if (index==-1) {
+              index=len-1;
+			}
+			boxImg[index].className='b-img'
+			 boxDot[index].className='oli';
+		}
+	</script>
+</body>
+</html>

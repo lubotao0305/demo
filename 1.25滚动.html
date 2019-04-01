@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#box{height: 50px;width: 50px;background: yellow;border-radius: 50%;position: absolute;top: 50px;left: 0px;}
+		
+	</style>
+</head>
+<body>
+	<button id="btn1">滚动右</button>
+	<button id="btn2">滚动左</button>
+	<button id="btn3">滚动上</button>
+	<button id="btn4">滚动下</button>
+	<div id="box"></div>
+	<script type="text/javascript">
+		var o=document.getElementById('box');
+		var speed=2;
+		var stu;
+		document.getElementById('btn1').onclick=function(){
+			clearInterval(stu);
+               stu=setInterval(moveHor,30,speed);
+		}
+		document.getElementById('btn2').onclick=function(){			  
+               clearInterval(stu);
+               stu=setInterval(moveHor,30,-speed);
+		}
+		document.getElementById('btn4').onclick=function(){
+               clearInterval(stu);
+               stu=setInterval(showBottom,30);
+		}
+         	document.getElementById('btn3').onclick=function(){
+               clearInterval(stu);
+               stu=setInterval(showTop,30);
+		}
+         function moveHor(speed){
+               var s=window.getComputedStyle(o,null).left;
+			s=parseInt(s);
+	    	o.style.left=s+speed+'px';
+         }
+          function moveSp(speed){
+               var s=window.getComputedStyle(o,null).left;
+			s=parseInt(s);
+	    	o.style.left=s+speed+'px';
+         }
+		// function showLeft(){
+		// 	var s=window.getComputedStyle(o,null).left;
+		// 	s=parseInt(s);
+		// 	o.style.left=s+index+'px';
+		// }
+		
+		// function showRight(){
+		// 	var s=window.getComputedStyle(o,null).left;
+		// 	s=parseInt(s);
+		// 	o.style.left=s-index+'px';
+		// }
+		// document.getElementById('btn3').onclick=function(){
+  //              clearInterval(stu);
+  //              stu=setInterval(showTop,30);
+		// }
+
+		function showTop(){
+			var s=window.getComputedStyle(o,null).top;
+			s=parseInt(s);
+			o.style.top=s-index+'px';
+		}
+		
+
+		function showBottom(){
+			var s=window.getComputedStyle(o,null).top;
+			s=parseInt(s);
+			o.style.top=s+index+'px';
+		}
+	</script>
+</body>
+</html>
